@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track Nutrition | LifeFit 360</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+  :root{
+    --primary:#4a2c71;
+    --accent:#4a3cff;
+    --muted:#777;
+    --card:#fff;
+    --glass: rgba(255,255,255,0.85);
+  }
+  *{box-sizing:border-box;font-family:'Poppins',sans-serif;margin:0;padding:0}
+  body{background:#f4f4f4;color:#222;padding:0;margin:0}
+
+  /* HEADER */
+  header {
+    background:#4a2c71;
+    color:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-radius:0 0 15px 15px;
+  }
+  header .logo { font-weight:700; font-size:20px; display:flex; align-items:center; gap:10px; }
+  nav ul { display:flex; gap:25px; list-style:none; }
+  nav ul li a { text-decoration:none; color:white; font-weight:600; }
+  .auth-buttons a { padding:6px 14px; border-radius:6px; cursor:pointer; font-weight:600; text-decoration:none; margin-left:8px;}
+  .auth-buttons .login { background:#eee; color:#000; }
+  .auth-buttons .signup { background:#4a3cff; color:white; }
+
+  /* PAGE LAYOUT */
+  .container{max-width:1200px;margin:24px auto;display:grid;grid-template-columns:360px 1fr;gap:20px;padding:0 12px}
+  .panel{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+  .panel h3{margin-bottom:12px;color:var(--primary)}
+  .small{font-size:13px;color:var(--muted)}
+  .stat-row{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .stat{flex:1;background:#fbfbfb;padding:12px;border-radius:8px;text-align:center}
+  .stat strong{display:block;font-size:18px}
+  .btn{display:inline-block;background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+  .btn.secondary{background:#eee;color:#222}
+  .btn.block{display:block;width:100%;text-align:center;margin-top:8px}
+  .main-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+  .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.06);margin-bottom:16px}
+  .flex{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  form .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+  input,select{padding:8px;border-radius:8px;border:1px solid #e6e6e6;flex:1}
+  label{font-size:13px;color:var(--muted);margin-bottom:6px;display:block}
+  ul.simple{list-style:none;padding-left:0}
+  ul.simple li{padding:6px 0;border-bottom:1px solid #f1f1f1;word-wrap: break-word;}
+  .micro{font-size:12px;color:var(--muted)}
+  #favoritesContainer{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .favorite-btn{background:#eee;padding:6px 10px;border-radius:8px;border:none;cursor:pointer;font-size:13px}
+  @media(max-width:1100px){ .container{grid-template-columns:1fr} .main-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🌐 LifeFit 360</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workout.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <a href="log.in.html" class="login">Login</a>
+    <a href="sign up.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- LEFT PANEL -->
+  <aside>
+    <div class="panel">
+      <h3>Today's Summary <span class="small" id="todayDate"></span></h3>
+      <div class="stat-row">
+        <div class="stat">
+          <small class="micro">Calories</small>
+          <strong id="cal-today">0</strong>
+          <div class="micro">Goal: <span id="goal-cal">2000</span></div>
+        </div>
+        <div class="stat">
+          <small class="micro">Protein</small>
+          <strong id="prot-today">0g</strong>
+          <div class="micro">Goal: <span id="goal-prot">100g</span></div>
+        </div>
+      </div>
+      <button class="btn block" id="openAdd">Add Food (Manual)</button>
+      <button class="btn block secondary" id="importFavorites">Import Favorites → Today</button>
+      <button class="btn block secondary" id="clearTodayMeals">Clear Today's Meals & Water</button>
+    </div>
+
+    <div class="panel">
+      <h3>Water Tracker</h3>
+      <div class="small">Goal: <strong id="water-goal-label">2000ml</strong></div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn secondary" id="add250">+250ml</button>
+        <button class="btn secondary" id="add500">+500ml</button>
+      </div>
+      <div style="margin-top:12px">
+        <div style="background:#f1f1f1;border-radius:12px;height:14px;overflow:hidden">
+          <div id="water-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent))"></div>
+        </div>
+        <div style="margin-top:8px" class="micro">Drank: <strong id="water-current">0</strong> / <span id="water-goal">2000</span> ml</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="main-grid">
+
+      <!-- LEFT: Macro chart and meals -->
+      <div>
+        <div class="card">
+          <h3>Macro Breakdown</h3>
+          <canvas id="macroChart" width="220" height="220"></canvas>
+        </div>
+
+        <div class="card">
+          <h3>Today's Meals</h3>
+          <ul class="simple" id="todayMealsList"></ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: Add food and favorites -->
+      <div>
+        <div class="card" id="addPanel">
+          <h3>Add Food (manual)</h3>
+          <form id="addForm">
+            <label>Food name</label>
+            <input id="food-name" required placeholder="e.g. Chicken breast">
+            <div class="row">
+              <div style="flex:1">
+                <label>Calories</label>
+                <input id="food-cal" type="number" min="0" required>
+              </div>
+              <div style="flex:1">
+                <label>Protein (g)</label>
+                <input id="food-prot" type="number" min="0" value="0">
+              </div>
+            </div>
+            <div class="row">
+              <div style="flex:1">
+                <label>Carbs (g)</label>
+                <input id="food-carb" type="number" min="0" value="0">
+              </div>
+              <div style="flex:1">
+                <label>Fat (g)</label>
+                <input id="food-fat" type="number" min="0" value="0">
+              </div>
+            </div>
+            <label>Category</label>
+            <select id="food-cat">
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Snacks</option>
+              <option>Drinks</option>
+              <option>Dessert</option>
+            </select>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn" type="submit">Add to Today</button>
+              <button type="button" class="btn secondary" id="clearForm">Clear</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Quick Add Favorite Meals</h3>
+          <div id="favoritesContainer"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+/* ====== LocalStorage keys ====== */
+const todayKey = d => d.toISOString().slice(0,10);
+const trackedKey = 'trackedMeals';
+const waterKey = 'waterLog';
+const goalsKey = 'trackGoals';
+
+/* ====== Load data ====== */
+let trackedMeals = JSON.parse(localStorage.getItem(trackedKey) || '[]');
+let waterLog = JSON.parse(localStorage.getItem(waterKey) || '{}');
+let goals = JSON.parse(localStorage.getItem(goalsKey) || {cal:2000,prot:100,water:2000});
+let favorites = JSON.parse(localStorage.getItem('favorites') || '[]'); // now array of objects
+
+/* ====== Elements ====== */
+const todayDateEl = document.getElementById('todayDate');
+const calTodayEl = document.getElementById('cal-today');
+const protTodayEl = document.getElementById('prot-today');
+const todayMealsList = document.getElementById('todayMealsList');
+const waterBar = document.getElementById('water-bar');
+const waterCurrentEl = document.getElementById('water-current');
+const waterGoalEl = document.getElementById('water-goal');
+const waterGoalLabel = document.getElementById('water-goal-label');
+const goalCalEl = document.getElementById('goal-cal');
+const goalProtEl = document.getElementById('goal-prot');
+const macroCtx = document.getElementById('macroChart');
+const favoritesContainer = document.getElementById('favoritesContainer');
+todayDateEl.innerText = new Date().toLocaleDateString();
+
+/* ====== Save data ====== */
+function saveAll(){
+    localStorage.setItem(trackedKey, JSON.stringify(trackedMeals));
+    localStorage.setItem(waterKey, JSON.stringify(waterLog));
+    localStorage.setItem(goalsKey, JSON.stringify(goals));
+}
+
+/* ====== Helpers ====== */
+function todayMeals(){ return trackedMeals.filter(m=>m.date===todayKey(new Date())); }
+function sumMacros(){ 
+    const sums = {cal:0,prot:0,carb:0,fat:0};
+    todayMeals().forEach(m=>{ sums.cal+=m.cal; sums.prot+=m.prot; sums.carb+=m.carb; sums.fat+=m.fat });
+    return sums;
+}
+function getWater(){ return waterLog[todayKey(new Date())]||0; }
+function setWater(val){ waterLog[todayKey(new Date())]=val; saveAll(); renderWater(); }
+
+/* ====== Render functions ====== */
+function renderToday(){
+    const sums = sumMacros();
+    calTodayEl.innerText = sums.cal;
+    protTodayEl.innerText = sums.prot + 'g';
+    todayMealsList.innerHTML='';
+    todayMeals().forEach(m=>{
+        const li = document.createElement('li');
+        li.innerHTML=`<strong>${m.name}</strong> (${m.category}) - ${m.cal} kcal • P ${m.prot}g • C ${m.carb}g • F ${m.fat}g`;
+        todayMealsList.appendChild(li);
+    });
+    updateMacroChart();
+}
+
+function renderWater(){
+    const val = getWater();
+    const pct = Math.min(100,Math.round((val/goals.water)*100));
+    waterBar.style.width=pct+'%';
+    waterCurrentEl.innerText = val;
+    waterGoalEl.innerText = goals.water;
+    waterGoalLabel.innerText = goals.water;
+}
+
+/* ====== Macro Chart ====== */
+let macroChart = null;
+function updateMacroChart(){
+    const sums = sumMacros();
+    const data = [sums.prot,sums.carb,sums.fat];
+    if(macroChart) macroChart.destroy();
+    macroChart = new Chart(macroCtx,{
+        type:'doughnut',
+        data:{
+            labels:['Protein','Carbs','Fat'],
+            datasets:[{
+                data:data,
+                backgroundColor:['#4a2c71','#6a9cff','#f39c12']
+            }]
+        },
+        options:{responsive:true,plugins:{legend:{position:'bottom'}}}
+    });
+}
+
+/* ====== Favorites ====== */
+function renderFavorites(){
+    favoritesContainer.innerHTML='';
+    favorites.forEach(f=>{
+        const btn = document.createElement('button');
+        btn.className='favorite-btn';
+        btn.innerText=f.name;
+        btn.addEventListener('click',()=>{
+            trackedMeals.push({
+                name: f.name,
+                cal: f.cal || 0,
+                prot: f.prot || 0,
+                carb: f.carb || 0,
+                fat: f.fat || 0,
+                category: 'Other',
+                date: todayKey(new Date())
+            });
+            saveAll();
+            renderToday();
+        });
+        favoritesContainer.appendChild(btn);
+    });
+}
+
+/* ====== Form Events ====== */
+document.getElementById('addForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=document.getElementById('food-name').value.trim();
+    const cal=Number(document.getElementById('food-cal').value)||0;
+    const prot=Number(document.getElementById('food-prot').value)||0;
+    const carb=Number(document.getElementById('food-carb').value)||0;
+    const fat=Number(document.getElementById('food-fat').value)||0;
+    const cat=document.getElementById('food-cat').value;
+    trackedMeals.push({name,cal,prot,carb,fat,category:cat,date:todayKey(new Date())});
+    saveAll();
+    renderToday();
+    document.getElementById('addForm').reset();
+});
+
+/* ====== Water buttons ====== */
+document.getElementById('add250').addEventListener('click',()=>{ setWater(getWater()+250); });
+document.getElementById('add500').addEventListener('click',()=>{ setWater(getWater()+500); });
+
+/* ====== Open Add Panel ====== */
+document.getElementById('openAdd').addEventListener('click',()=>{
+    window.scrollTo({top:document.getElementById('addPanel').offsetTop-20,behavior:'smooth'});
+    document.getElementById('food-name').focus();
+});
+
+/* ====== Import Favorites to Today ====== */
+document.getElementById('importFavorites').addEventListener('click',()=>{
+    let added=0;
+    favorites.forEach(f=>{
+        if(!trackedMeals.some(m=>m.date===todayKey(new Date())&&m.name===f.name)){
+            trackedMeals.push({
+                name: f.name,
+                cal: f.cal || 0,
+                prot: f.prot || 0,
+                carb: f.carb || 0,
+                fat: f.fat || 0,
+                category: 'Other',
+                date: todayKey(new Date())
+            });
+            added++;
+        }
+    });
+    saveAll();
+    renderToday();
+    alert(`${added} favorite(s) added to Today.`);
+});
+
+/* ====== Clear Today's Meals & Water ====== */
+document.getElementById('clearTodayMeals').addEventListener('click', () => {
+    if(confirm("Are you sure you want to clear all meals and water for today?")) {
+        // Remove only today's meals
+        trackedMeals = trackedMeals.filter(m => m.date !== todayKey(new Date()));
+        // Reset today's water
+        waterLog[todayKey(new Date())] = 0;
+        saveAll();
+        renderToday();
+        renderWater();
+        alert("Today's meals and water have been cleared.");
+    }
+});
+
+/* ====== Sync favorites real-time across pages ====== */
+window.addEventListener('storage',e=>{
+    if(e.key==='favorites'){
+        favorites=JSON.parse(e.newValue||'[]');
+        renderFavorites();
+    }
+});
+
+/* ====== Initial render ====== */
+renderToday();
+renderWater();
+renderFavorites();
+</script>
+
+</body>
+</html>

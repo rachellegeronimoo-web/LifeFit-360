@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LifeFit 360 | Workouts</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
+  body{background:white;color:#4a2c71;}
+  header{background:#4a2c71;color:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 15px 15px;}
+  .logo{font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px;}
+  nav ul{display:flex;gap:25px;list-style:none;}
+  nav a{text-decoration:none;color:white;font-weight:600;}
+  .auth-buttons a{padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;text-decoration:none;}
+  .auth-buttons .login{background:#eee;color:#000;}
+  .auth-buttons .signup{background:#4a3cff;color:white;}
+
+  .hero-banner{
+    width:100%;
+    height:85vh;
+    background:url('banner.jpg') center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:48px;
+    font-weight:bold;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  }
+
+  .categories{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:20px 0;
+    flex-wrap:wrap;
+  }
+  .categories button{
+    background:#4a2c71;
+    color:white;
+    padding:12px 24px;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition: background 0.3s ease;
+  }
+  .categories button:hover{background:#6b44a1;}
+  .categories button.active{background:#222;}
+
+  .programs-container{
+    display:none;
+    max-width:1200px;
+    margin:0 auto 50px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    opacity:0;
+    transition: opacity 0.5s ease;
+    grid-auto-rows: 1fr;
+  }
+  .programs-container.show{opacity:1;}
+  .program-card{
+    background:#f4f4f4;
+    border-radius:15px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  .program-card:hover{
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  .program-card img{width:100%;height:150px;object-fit:cover;}
+  .program-card-content{
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    flex-grow:1;
+  }
+  .program-card-content h3{font-size:18px;font-weight:700;}
+  .program-card-content p{font-size:14px;color:#333;}
+  .program-details{display:flex;justify-content:space-between;font-size:12px;color:#555;}
+  .program-card-content a{
+    margin-top:auto;
+    display:inline-block;
+    background:#4a2c71;
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:600;
+    text-decoration:none;
+    text-align:center;
+    transition: background 0.3s ease;
+  }
+  .program-card-content a:hover{background:#6b44a1;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="index.html" style="text-decoration:none;color:white;">🌐 LifeFit 360</a></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workout.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <a href="log.in.html" class="login">Log In</a>
+    <a href="sign up.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<div class="hero-banner"></div>
+
+<div class="categories">
+  <button class="active" onclick="showCategory('abs-core', this)">ABS & CORE</button>
+  <button onclick="showCategory('full-body', this)">FULL BODY</button>
+  <button onclick="showCategory('arms', this)">ARMS</button>
+  <button onclick="showCategory('legs', this)">LEGS</button>
+  <button onclick="showCategory('hiit', this)">HIIT</button>
+  <button onclick="showCategory('flexibility', this)">BOOTY</button>
+</div>
+
+<!-- ABS & CORE -->
+<div class="programs-container" id="abs-core">
+  <div class="program-card"><img src="abs 1.jpg" alt=""><div class="program-card-content"><h3>Standing Abs</h3><p>10 MIN STANDING ABS WORKOUT | Get Ab Lines & Slim Waist .</p><div class="program-details"><span>15 min</span><span>Beginner</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 2.jpg" alt=""><div class="program-card-content"><h3>Lower Abs</h3><p>BEST 15-DAY LOWER ABS & INTENSE BELLY FAT BURN PROGRAM </p><div class="program-details"><span>15 min</span><span>Intermediate</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 3.jpg" alt=""><div class="program-card-content"><h3>Ab Blast</h3><p>Best 20 min Intense Abs & Belly Burn Workout</p><div class="program-details"><span>25 min</span><span>Beginner</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 4.jpg" alt=""><div class="program-card-content"><h3>Six-Pack Challenge</h3><p>Abs & Belly Burn in 2 Weeks | 10 min Intense Abs Workout</p><div class="program-details"><span>10 min</span><span>Advanced</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 5.jpg" alt=""><div class="program-card-content"><h3>Plank Master</h3><p>ABS ON FIRE 🔥 Ab Lines, Lower Abs, Inner Core, Slim Waist </p><div class="program-details"><span>10 min</span><span>Beginner</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 6.jpg" alt=""><div class="program-card-content"><h3>Crunch Burn</h3><p>10 MIN LOWER ABS BURN | 28-Day Abs & Belly Challenge </p><div class="program-details"><span>15 min</span><span>Intermediate</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 7.jpg" alt=""><div class="program-card-content"><h3>Oblique Twist</h3><p>Abs in 20 Days! Get 11 Line Abs like KPOP Idol (15 min Home Workout) </p><div class="program-details"><span>20 min</span><span>Intermediate</span></div><a href="program.html">Start Program</a></div></div>
+  <div class="program-card"><img src="abs 8.jpg" alt=""><div class="program-card-content"><h3>Core Shred</h3><p>30 min Killer Abs & Belly Burn (Lower, Upper, Side, Inner Core) | 30-Day Sweaty 30 Challenge </p><div class="program-details"><span>30 min</span><span>Advanced</span></div><a href="program.html">Start Program</a></div></div>
+</div>
+
+<!-- FULL BODY -->
+<div class="programs-container" id="full-body">
+  <div class="program-card"><img src="full body 1.jpg" alt=""><div class="program-card-content"><h3>BEST PLANK WORKOUT FOR SMALLER WAIST, FLAT ABS & FULL BODY FAT BURN!</h3><p>Complete strength routine.</p><div class="program-details"><span>15 min</span><span>Intermediate</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 2.jpg" alt=""><div class="program-card-content"><h3>Body Sculpt</h3><p>20 min Full Body Fat Burning Cardio (No Jumping)</p><div class="program-details"><span>25 min</span><span>Beginner</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 3.jpg" alt=""><div class="program-card-content"><h3>Strength Circuit</h3><p>30 min Full Body Fat Burn HIIT (NO JUMPING) - Ab, Core, Arm, Back, Leg, Thigh & Cardio </p><div class="program-details"><span>30 min</span><span>Advanced</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 4.jpg" alt=""><div class="program-card-content"><h3>Power Burn</h3><p>45-min Full Body Fat Burn HIIT at home with NO JUMPING (Arms, Abs, Back, Thighs & Legs) </p><div class="program-details"><span>45 min</span><span>Intermediate</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 5.jpg" alt=""><div class="program-card-content"><h3>Total Tone</h3><p>1 HOUR FULL BODY FAT BURN HOME WORKOUT (Warm Up, Arm & Back, Cardio, Ab, Leg & Thigh, Stretch) </p><div class="program-details"><span>1 hr</span><span>Beginner</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 6.jpg" alt=""><div class="program-card-content"><h3>Core & Cardio</h3><p>BEST 30 MIN FULL BODY FAT BURN WORKOUT (with No Jumping Options)</p><div class="program-details"><span>30 min</span><span>Advanced</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 7.jpg" alt=""><div class="program-card-content"><h3>Body Burn</h3><p>40 min Standing Cardio to Lose Weight for Beginners (No Jumping)</p><div class="program-details"><span>40 min</span><span>Advanced</span></div><a href="program2.html">Start Program</a></div></div>
+  <div class="program-card"><img src="full body 8.jpg" alt=""><div class="program-card-content"><h3>Total Shred</h3><p>45 min Full Body Workout to BURN MAX CALORIES (Results in 2 Weeks)</p><div class="program-details"><span>45 min</span><span>Advanced</span></div><a href="program2.html">Start Program</a></div></div>
+</div>
+
+<!-- ARMS -->
+<div class="programs-container" id="arms">
+  <div class="program-card"><img src="arms 1.jpg" alt=""><div class="program-card-content"><h3>Bicep Blast</h3><p>10 MIN SITTING ARM & SHOULDER WORKOUT (ON COUCH / BED WHILE WATCHING TV)</p><div class="program-details"><span>10 min</span><span>Beginner</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 2.jpg" alt=""><div class="program-card-content"><h3>Tricep Tone</h3><p>BEST Standing Arms Workout! 10 min BURN & TONING (No Equipment, Perfect For Beginners) </p><div class="program-details"><span>10 min</span><span>Intermediate</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 3.jpg" alt=""><div class="program-card-content"><h3>Arm Sculpt</h3><p>SLIM ARMS + GET RID OF FLABBY FAT! 30 Best Exercises in 15 min TABATA (Results in 2 Weeks) </p><div class="program-details"><span>15 min</span><span>Advanced</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 4.jpg" alt=""><div class="program-card-content"><h3>Push-Up Power</h3><p>SLIM ARMS & UPPER BODY IN 20 DAYS! 10 min Beginner Friendly Home Workout </p><div class="program-details"><span>15 min</span><span>Beginner</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 5.jpg" alt=""><div class="program-card-content"><h3>Dumbbell Blast</h3><p>15 MIN ARMS, BACK & CHEST | 15-Day Upper Body Transform Program</p><div class="program-details"><span>15 min</span><span>Intermediate</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 6.jpg" alt=""><div class="program-card-content"><h3>Strength Circuit</h3><p>Burn Arm Flab, Back Fat & Bra Bulge | 4 Week Get Fit Challenge </p><div class="program-details"><span>15 min</span><span>Advanced</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 7.jpg" alt=""><div class="program-card-content"><h3>Arm Burner</h3><p>10 MIN EXERCISE & STRETCH FOR SHOULDERS, NECK & THE COLLARBONE AREA </p><div class="program-details"><span>10 min</span><span>Advanced</span></div><a href="program3.html">Start Program</a></div></div>
+  <div class="program-card"><img src="arms 8.jpg" alt=""><div class="program-card-content"><h3>Upper Sculpt</h3><p>FIX & SLIM YOUR BACK + BETTER POSTURE in 10 minutes</p><div class="program-details"><span>10 min</span><span>Intermediate</span></div><a href="program3.html">Start Program</a></div></div>
+</div>
+
+<!-- LEGS -->
+<div class="programs-container" id="legs">
+  <div class="program-card"><img src="legs 1.jpg" alt=""><div class="program-card-content"><h3>Leg Burn</h3><p>SLIM LEGS IN 20 DAYS! 10 min No Jumping Quiet Home Workout </p><div class="program-details"><span>10 min</span><span>Beginner</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 2.jpg" alt=""><div class="program-card-content"><h3>Glute Sculpt</h3><p>30 min Leg & Booty Workout (Floor Only)</p><div class="program-details"><span>30 min</span><span>Intermediate</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 3.jpg" alt=""><div class="program-card-content"><h3>Thigh Tone</h3><p>30 min LEG & THIGH Killer Burn Workout </p><div class="program-details"><span>30 min</span><span>Advanced</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 4.jpg" alt=""><div class="program-card-content"><h3>Lunge Power</h3><p>20 min SLIM INNER & OUTER THIGH (Lying Down Exercises Only)</p><div class="program-details"><span>25 min</span><span>Beginner</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 5.jpg" alt=""><div class="program-card-content"><h3>Squat Challenge</h3><p>20 MIN LEGS, BUTT & THIGHS WORKOUT (Home Workout)</p><div class="program-details"><span>25 min</span><span>Intermediate</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 6.jpg" alt=""><div class="program-card-content"><h3>Leg Shred</h3><p>30 min LEGS & BUTT BURN | Killer Home Workout </p><div class="program-details"><span>10 min</span><span>Advanced</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 7.jpg" alt=""><div class="program-card-content"><h3>Booty Lift</h3><p>15 min BOOTY & LEG LIFT FOR BEGINNERS (No Equipment)</p><div class="program-details"><span>20 min</span><span>Beginner</span></div><a href="program4.html">Start Program</a></div></div>
+  <div class="program-card"><img src="legs 8.jpg" alt=""><div class="program-card-content"><h3>Thigh Burner</h3><p>30 min LEGS & THIGHS | No Equipment</p><div class="program-details"><span>20 min</span><span>Advanced</span></div><a href="program4.html">Start Program</a></div></div>
+</div>
+
+<!-- HIIT -->
+<div class="programs-container" id="hiit">
+  <div class="program-card"><img src="hiit 1.jpg" alt=""><div class="program-card-content"><h3>HIIT Blast</h3><p>15 min High Intensity Interval Training (Beginners Friendly)</p><div class="program-details"><span>15 min</span><span>Beginner</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 2.jpg" alt=""><div class="program-card-content"><h3>Cardio Burn</h3><p>20 min Fat Burning HIIT Home Workout </p><div class="program-details"><span>20 min</span><span>Intermediate</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 3.jpg" alt=""><div class="program-card-content"><h3>Full Body HIIT</h3><p>30 min Full Body Fat Burn HIIT</p><div class="program-details"><span>30 min</span><span>Advanced</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 4.jpg" alt=""><div class="program-card-content"><h3>Quick HIIT</h3><p>10 min Intense HIIT Quick Workout</p><div class="program-details"><span>10 min</span><span>Beginner</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 5.jpg" alt=""><div class="program-card-content"><h3>Tabata HIIT</h3><p>20 min Tabata Style High Intensity Interval Training</p><div class="program-details"><span>20 min</span><span>Intermediate</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 6.jpg" alt=""><div class="program-card-content"><h3>Advanced HIIT</h3><p>30 min High Intensity Interval Full Body Workout</p><div class="program-details"><span>30 min</span><span>Advanced</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 7.jpg" alt=""><div class="program-card-content"><h3>Morning HIIT</h3><p>15 min Morning Fat Burning HIIT</p><div class="program-details"><span>15 min</span><span>Beginner</span></div><a href="program5.html">Start Program</a></div></div>
+  <div class="program-card"><img src="hiit 8.jpg" alt=""><div class="program-card-content"><h3>Endurance HIIT</h3><p>25 min Full Body HIIT & Endurance Training</p><div class="program-details"><span>25 min</span><span>Advanced</span></div><a href="program5.html">Start Program</a></div></div>
+</div>
+
+<!-- BOOTY / FLEXIBILITY -->
+<div class="programs-container" id="flexibility">
+  <div class="program-card"><img src="booty1.jpg" alt=""><div class="program-card-content"><h3>Booty Lift</h3><p>10 min Booty Workout for Beginners</p><div class="program-details"><span>10 min</span><span>Beginner</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty2.jpg" alt=""><div class="program-card-content"><h3>Glute Tone</h3><p>15 min Glute Strengthening Workout</p><div class="program-details"><span>15 min</span><span>Intermediate</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty3.jpg" alt=""><div class="program-card-content"><h3>Hip Shaper</h3><p>20 min Booty & Hip Shaping Exercises</p><div class="program-details"><span>20 min</span><span>Advanced</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty4.jpg" alt=""><div class="program-card-content"><h3>Lower Body Stretch</h3><p>15 min Flexibility Stretch for Legs & Glutes</p><div class="program-details"><span>15 min</span><span>Beginner</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty5.jpg" alt=""><div class="program-card-content"><h3>Booty Burn</h3><p>20 min Glute & Thigh Burn Workout</p><div class="program-details"><span>20 min</span><span>Intermediate</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty6.jpg" alt=""><div class="program-card-content"><h3>Glute Sculpt</h3><p>25 min Booty Sculpting Routine</p><div class="program-details"><span>25 min</span><span>Advanced</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty7.jpg" alt=""><div class="program-card-content"><h3>Stretch & Tone</h3><p>15 min Flexibility & Toning Workout</p><div class="program-details"><span>15 min</span><span>Beginner</span></div><a href="program6.html">Start Program</a></div></div>
+  <div class="program-card"><img src="booty8.jpg" alt=""><div class="program-card-content"><h3>Booty Blast</h3><p>20 min Glute Toning & Lifting Exercises</p><div class="program-details"><span>20 min</span><span>Intermediate</span></div><a href="program6.html">Start Program</a></div></div>
+</div>
+
+<script>
+function showCategory(cat, btn){
+  const containers=document.querySelectorAll('.programs-container');
+  containers.forEach(c=>{c.classList.remove('show');c.style.display='none';});
+  const active=document.getElementById(cat);
+  if(active){active.style.display='grid';setTimeout(()=>active.classList.add('show'),50);}
+  document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+document.addEventListener('DOMContentLoaded',()=>{showCategory('abs-core',document.querySelector('.categories button.active'));});
+</script>
+
+</body>
+</html>
