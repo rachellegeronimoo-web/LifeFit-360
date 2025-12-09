@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition | LifeFit 360</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { background:#f4f4f4; }
+
+/* HEADER */
+header {
+  background:#4a2c71;
+  color:white;
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-radius:0 0 15px 15px;
+}
+header .logo { font-weight:700; font-size:20px; display:flex; align-items:center; gap:10px; }
+nav ul { display:flex; gap:25px; list-style:none; }
+nav a { text-decoration:none; color:white; font-weight:600; }
+.auth-buttons a { padding:6px 14px; border-radius:6px; cursor:pointer; font-weight:600; text-decoration:none; }
+.auth-buttons .login { background:#eee; color:#000; }
+.auth-buttons .signup { background:#4a3cff; color:white; }
+
+/* SECTION HEADINGS */
+section { max-width:1200px; margin:40px auto; padding:0 20px; }
+section h2 { font-size:28px; margin-bottom:20px; color:#4a2c71; }
+
+/* CARD GRID */
+.cards { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+
+/* SAME HEIGHT CARDS */
+.card {
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0px 4px 12px rgba(0,0,0,0.1);
+  transition:transform 0.3s;
+  cursor:pointer;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover { transform:translateY(-5px); }
+.card img { width:100%; height:180px; object-fit:cover; }
+
+/* ALIGN CONTENT */
+.card-content {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* space between top content and bottom buttons */
+}
+
+/* BUTTON ALWAYS STAYS IN SAME SPOT */
+.favorite-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.favorite-btn {
+  padding:6px 10px;
+  border:none;
+  background:#4a2c71;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.favorite-btn.added {
+  background:#f39c12;
+}
+
+@media(max-width:600px){
+  header { flex-direction: column; gap:15px; }
+  nav ul { flex-wrap:wrap; justify-content:center; }
+}
+
+/* FAVORITES SIDEBAR */
+#favorites-panel {
+  position:fixed;
+  right:20px;
+  top:100px;
+  width:250px;
+  background:white;
+  border-radius:12px;
+  padding:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  max-height:80vh;
+  overflow-y:auto;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+  z-index:9999;
+}
+
+#favorites-panel.open { display:flex; }
+
+#favorites-panel ul { list-style:none; padding-left:0; margin-top:10px; }
+
+#favorites-panel ul li {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:4px 0;
+  border-bottom:1px solid #eee;
+}
+
+#favorites-panel ul li button {
+  background:#f39c12;
+  border:none;
+  color:white;
+  padding:2px 6px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.card-link {
+  text-decoration: none; /* removes underline */
+  color: inherit;        /* keeps original text color */
+  display: block;        /* makes entire card clickable */
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html" style="text-decoration:none;color:white;">🌐 LifeFit 360</a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workout.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+    <a href="log.in.html" class="login">Log In</a>
+    <a href="sign up.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<!-- FAVORITES SIDEBAR -->
+<div id="favorites-panel">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2 style="color:#4a2c71; margin:0;">Favorites</h2>
+    <button id="close-favorites" style="cursor:pointer; background:#eee; border:none; padding:4px 8px; border-radius:6px;">X</button>
+  </div>
+  <ul id="favorites-list"></ul>
+</div>
+
+<!-- ==================== SECTIONS ==================== -->
+<!-- Breakfast Section -->
+<section>
+  <h2>Breakfast</h2>
+  <div class="cards">
+    <!-- Breakfast Burrito -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="b1.jpg">
+        <div class="card-content">
+          <h3>Breakfast Burrito</h3>
+          <p>A hearty, protein-packed breakfast option that fuels your morning and keeps you satisfied.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Avocado Toast">Add to Favorites</button>
+            <div class="nutrition">Calories: 330 | Protein: 12g | Carbs: 8g | Fat : 168 </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Breakfast Bars -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="b2.jpg">
+        <div class="card-content">
+          <h3>Breakfast Bars</h3>
+          <p>A simple, energizing snack made with oats, banana, and chocolate chips—great for steady energy and staying on track with your fitness goals.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Oatmeal Bowl">Add to Favorites</button>
+            <div class="nutrition">Calories: 290 | Protein: 12g | Carbs: 8g | Fat : 113</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Vegan Breakfast Plate -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="b3.jpg">
+        <div class="card-content">
+          <h3>Vegan Breakfast Plate</h3>
+          <p>A balanced, nutrient-dense meal packed with healthy fats, fiber, and plant-based energy.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Greek Yogurt">Add to Favorites</button>
+            <div class="nutrition">Calories: 323 | Protein: 12g | Carbs: 8g | Fat : 289</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Savory Quinoa Breakfast Bowl -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="b4.jpg">
+        <div class="card-content">
+          <h3>Savory Quinoa Breakfast Bowl</h3>
+          <p>A protein-rich, energizing bowl made with wholesome ingredients to keep you full and fueled—perfect.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Fruit Smoothie">Add to Favorites</button>
+            <div class="nutrition">Calories: 448| Protein:8g | Carbs: 8g | Fat : 178</div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Lunch Section -->
+<section>
+  <h2>Lunch</h2>
+  <div class="cards">
+    <!-- Grilled Chicken Salad -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="l1.jpg">
+        <div class="card-content">
+          <h3>Shrimp Jambalaya</h3>
+          <p>A protein-rich, energizing bowl made with wholesome ingredients to keep you full and fueled.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Grilled Chicken Salad">Add to Favorites</button>
+            <div class="nutrition">Calories: 430 | Protein: 10g | Carbs: 33 | Fat : 189</div>
+          </div>
+        </div>
+      </div>
+    </a>
+    
+    <!-- Quinoa Bowl -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="l2.jpg">
+        <div class="card-content">
+          <h3>High Protein Chicken Fried Rice</h3>
+          <p>A satisfying, protein-rich dish with lean chicken, veggies, and hearty rice.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Quinoa Bowl">Add to Favorites</button>
+            <div class="nutrition">Calories: 460 | Protein: 12g | Carbs: 9g | Fat : 289</div>
+          </div>
+        </div>
+      </div>
+    </a>
+    
+    <!-- Turkey Sandwich -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="l3.jpg">
+        <div class="card-content">
+          <h3>Soy-Glazed Chicken</h3>
+          <p>Tender, flavorful chicken coated in a savory soy glaze</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Turkey Sandwich">Add to Favorites</button>
+            <div class="nutrition">Calories: 340| Protein: 11g | Carbs: 11g | Fat : 179</div>
+          </div>
+        </div>
+      </div>
+    </a>
+    
+    <!-- Veggie Wrap -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="l4.jpg">
+        <div class="card-content">
+          <h3>Teriyaki Salmon Poke Bowl</h3>
+          <p>A nutrient-packed bowl with protein-rich salmon, wholesome grains, and fresh veggies.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Veggie Wrap">Add to Favorites</button>
+            <div class="nutrition">Calories: 210 | Protein: 10g | Carbs: 9g | Fat : 133</div>
+          </div>
+        </div>
+      </div>
+    </a>
+    
+  </div>
+</section>
+
+<!-- Dinner Section -->
+<section>
+  <h2>Dinner</h2>
+  <div class="cards">
+    <!-- Salmon with Veggies -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="d1.jpg">
+        <div class="card-content">
+          <h3>Easy Microwave Baked Potato</h3>
+          <p>A quick, fiber-rich carb option that provides lasting energy for workouts and keeps you full.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Salmon with Veggies">Add to Favorites</button>
+            <div class="nutrition">Calories: 303 | Protein: 11g | Carbs: 7g | Fat : 113</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Grilled Steak -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="d2.jpg">
+        <div class="card-content">
+          <h3>Healthy Teriyaki Meatballs</h3>
+          <p>Lean, protein-packed meatballs with a savory teriyaki glaze—perfect for muscle support and balanced meals.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Grilled Steak">Add to Favorites</button>
+            <div class="nutrition">Calories: 430 | Protein: 14g | Carbs: 8g | Fat : 189</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Stuffed Peppers -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="d3.jpg">
+        <div class="card-content">
+          <h3>Easy Egg Salad</h3>
+          <p>A protein-rich, satisfying salad made with eggs and wholesome ingredients.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Stuffed Peppers">Add to Favorites</button>
+            <div class="nutrition">Calories: 410 | Protein: 12g | Carbs: 8g | Fat : 193</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Chicken Stir Fry -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="d4.jpg">
+        <div class="card-content">
+          <h3>Buttered Chicken</h3>
+          <p>Tender, flavorful chicken that’s high in protein to support muscle growth and keep meals fitness-friendly.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Chicken Stir Fry">Add to Favorites</button>
+            <div class="nutrition">Calories: 430 | Protein: 12g | Carbs: 8g | Fat : 313</div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Snacks Section -->
+<section>
+  <h2>Snacks</h2>
+  <div class="cards">
+    <!-- Nuts Mix -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="s1.jpg">
+        <div class="card-content">
+          <h3>Gluten Free Chocolate Chip</h3>
+          <p>Guilt-free way to satisfy your sweet cravings while supporting your fitness goals.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Nuts Mix">Add to Favorites</button>
+            <div class="nutrition">Calories: 202| Protein 2g|Carbs: 18g|Sugars: 10g|Fiber: 1g|Fat: 7g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Protein Bar -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="s2.jpg">
+        <div class="card-content">
+          <h3>Choco Lava Baked Oatmeal</h3>
+          <p>A warm, gooey, fitness-friendly treat.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Protein Bar">Add to Favorites</button>
+            <div class="nutrition">Calories: 220| Protein 11g|Carbs: 55g|Fat: 9g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Fruit Bowl -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="s3.jpg">
+        <div class="card-content">
+          <h3>Baked Avocado Eggs</h3>
+          <p>Protein-rich snack perfect for supporting your fitness goals.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Fruit Bowl">Add to Favorites</button>
+            <div class="nutrition">Calories: 250| Protein 8g|Carbs: 7g|Fat: 23g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Greek Yogurt Snack -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="s4.jpg">
+        <div class="card-content">
+          <h3>Pizza Omelette</h3>
+          <p>Bold flavors of pizza in a protein-packed, fitness-friendly meal.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Greek Yogurt Snack">Add to Favorites</button>
+            <div class="nutrition">Calories: 260| Protein 17g|Carbs: 6g|Fat: 16g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Drinks Section -->
+<section>
+  <h2>Drinks</h2>
+  <div class="cards">
+    <!-- Green Smoothie -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="dr1.jpg">
+        <div class="card-content">
+          <h3>Sugar-Free Lemonade</h3>
+          <p>Refreshing and hydrating without the added sugar—perfect for a low-calorie energy boost.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Green Smoothie">Add to Favorites</button>
+            <div class="nutrition">Calories: 10| Protein 0 g|Carbs: 2g|Fat: 0g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Berry Smoothie -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="dr2.jpg">
+        <div class="card-content">
+          <h3>Banana-Free Chocolate Protein Smoothie</h3>
+          <p>A creamy, protein-packed smoothie to support muscle recovery and fuel your workouts.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Berry Smoothie">Add to Favorites</button>
+           <div class="nutrition">Calories: 170| Protein 22g|Carbs: 7g|Sugars: 2g|Fat: 6g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Lemon Water -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="dr3.jpg">
+        <div class="card-content">
+          <h3>Milk tea with Coffee Jelly</h3>
+          <p>A flavorful, energizing drink with a caffeine kick—enjoy mindfully as a treat while staying active.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Lemon Water">Add to Favorites</button>
+            <div class="nutrition">Calories: 320| Protein 2g|Carbs: 40g|Sugars: 30g|Fat: 8g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Protein Shake -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="dr4.jpg">
+        <div class="card-content">
+          <h3>Matcha Latte with Mini Taro Balls</h3>
+          <p>A balanced mix of antioxidants, natural energy, and a touch of sweetness—great for a midday boost.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Protein Shake">Add to Favorites</button>
+            <div class="nutrition">Calories: 350| Protein 7g|Carbs: 55g|Fat: 7g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Dessert Section -->
+<section>
+  <h2>Dessert</h2>
+  <div class="cards">
+    <!-- Dark Chocolate -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="ds1.jpg">
+        <div class="card-content">
+          <h3>Chocolate Sweet Potato Pancake</h3>
+          <p>Naturally sweet and nutrient-rich, these pancakes provide fiber and slow-digesting carbs for sustained energy.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Dark Chocolate">Add to Favorites</button>
+            <div class="nutrition">Calories: 180| Protein 7g|Carbs: 35g|Fat: 7g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Fruit Tart -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="ds2.jpg">
+        <div class="card-content">
+          <h3>Raspberry Yogurt Ice Cream</h3>
+          <p>A fruity, protein-boosted treat that satisfies your sweet tooth while supporting recovery.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Fruit Tart">Add to Favorites</button>
+            <div class="nutrition">Calories: 140| Protein 6g|Carbs: 20g|Fat: 5g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Yogurt Parfait -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="ds3.jpg">
+        <div class="card-content">
+          <h3>Peanut Butter Protein Cheesecake</h3>
+          <p>Rich in protein and flavor, this cheesecake helps fuel muscles while letting you enjoy a guilt-free dessert.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Yogurt Parfait">Add to Favorites</button>
+            <div class="nutrition">Calories: 250| Protein 15g|Carbs: 12g|Fat: 15g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Energy Balls -->
+    <a href="ingredients.html" class="card-link">
+      <div class="card">
+        <img src="ds4.jpg">
+        <div class="card-content">
+          <h3>Healthy Cinnamon Donuts</h3>
+          <p>Light, spiced, and nutrient-conscious, these donuts are a sweet way to stay on track with your fitness goals.</p>
+          <div class="favorite-wrapper">
+            <button class="favorite-btn" data-name="Energy Balls">Add to Favorites</button>
+            <div class="nutrition">Calories: 160| Protein 6g|Carbs: 20g|Fat: 6g </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<script>
+let savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+const favoritesPanel = document.getElementById('favorites-panel');
+const favoritesList = document.getElementById('favorites-list');
+const closeFavorites = document.getElementById('close-favorites');
+
+/* Render Favorites in sidebar */
+function renderFavorites() {
+  favoritesList.innerHTML = '';
+  savedFavorites.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item.name;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => {
+      savedFavorites = savedFavorites.filter(f => f.name !== item.name);
+      localStorage.setItem('favorites', JSON.stringify(savedFavorites));
+      renderFavorites();
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        if(btn.dataset.name === item.name) btn.classList.remove('added'), btn.innerText = 'Add to Favorites';
+      });
+      // Notify Track page
+      localStorage.setItem('favoritesUpdated', Date.now());
+    };
+
+    li.appendChild(removeBtn);
+    favoritesList.appendChild(li);
+  });
+  if(savedFavorites.length > 0) favoritesPanel.classList.add('open');
+  else favoritesPanel.classList.remove('open');
+}
+
+/* Handle favorite button clicks */
+document.querySelectorAll(".favorite-btn").forEach(btn => {
+  const name = btn.dataset.name;
+
+  // Extract nutrition info from the visible nutrition div
+  const nutritionText = btn.nextElementSibling.innerText; // e.g. "Calories: 320 | Protein: 12g"
+  const calMatch = nutritionText.match(/Calories:\s*(\d+)/i);
+  const protMatch = nutritionText.match(/Protein:\s*(\d+)/i);
+  const carbMatch = nutritionText.match(/Carbs:\s*(\d+)/i);
+  const fatMatch = nutritionText.match(/Fat:\s*(\d+)/i);
+
+  const item = {
+    name,
+    cal: calMatch ? Number(calMatch[1]) : 0,
+    prot: protMatch ? Number(protMatch[1]) : 0,
+    carb: carbMatch ? Number(carbMatch[1]) : 0,
+    fat: fatMatch ? Number(fatMatch[1]) : 0
+  };
+
+  if(savedFavorites.some(f => f.name === item.name)) { 
+    btn.classList.add("added"); 
+    btn.innerText = "Added to Favorites"; 
+  }
+
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("added");
+    if (btn.classList.contains("added")) {
+      btn.innerText = "Added to Favorites";
+      if(!savedFavorites.some(f => f.name === item.name)) savedFavorites.push(item);
+    } else {
+      btn.innerText = "Add to Favorites";
+      savedFavorites = savedFavorites.filter(f => f.name !== item.name);
+    }
+    localStorage.setItem("favorites", JSON.stringify(savedFavorites));
+    renderFavorites();
+
+    // Notify Track page that favorites changed
+    localStorage.setItem('favoritesUpdated', Date.now());
+  });
+});
+
+closeFavorites.addEventListener('click', () => { favoritesPanel.classList.remove('open'); });
+
+renderFavorites();
+
+/* ====== Listen for favorites updates in other tabs/pages ====== */
+window.addEventListener('storage', e => {
+  if(e.key === 'favorites') {
+    savedFavorites = JSON.parse(e.newValue || '[]');
+    renderFavorites();
+  }
+});
+</script>
+
+
+</body>
+</html>

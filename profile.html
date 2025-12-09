@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LifeFit 360 | Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
+  body{background:white;color:#4a2c71;}
+
+  header{background:#4a2c71;color:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 15px 15px;}
+  .logo{font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px;}
+  nav ul{display:flex;gap:25px;list-style:none;}
+  nav a{text-decoration:none;color:white;font-weight:600;}
+  .auth-buttons a{padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;text-decoration:none;}
+  .auth-buttons .login{background:#eee;color:#000;}
+  .auth-buttons .signup{background:#4a3cff;color:white;}
+
+  .profile-container{max-width:900px;margin:40px auto;background:#f4f4f4;padding:30px;border-radius:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+
+  .profile-header{display:flex;align-items:center;gap:25px;margin-bottom:25px;}
+  .profile-header img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:4px solid #4a2c71;}
+  .profile-header-info h2{font-size:28px;font-weight:700;color:#4a2c71;}
+  .profile-header-info p{font-size:14px;color:#444;}
+
+  .stats{display:flex;justify-content:space-between;background:white;padding:20px;border-radius:15px;margin-top:20px;box-shadow:0 3px 10px rgba(0,0,0,0.08);}
+  .stat{text-align:center;width:30%;}
+  .stat h3{font-size:22px;font-weight:700;color:#4a2c71;}
+  .stat p{font-size:13px;color:#555;}
+
+  .section-block{margin-top:30px;}
+  .section-block h2{font-size:22px;font-weight:700;margin-bottom:15px;color:#4a2c71;}
+  
+  .card{background:white;padding:20px;border-radius:15px;margin-bottom:15px;box-shadow:0 3px 10px rgba(0,0,0,0.08);}
+  .card h3{font-size:18px;font-weight:600;margin-bottom:8px;}
+  .card p{font-size:14px;color:#444;}
+
+  .edit-btn{margin-top:20px;padding:12px 25px;background:#4a2c71;color:white;border:none;border-radius:10px;font-weight:600;cursor:pointer;display:block;text-align:center;text-decoration:none;}
+
+  /* Two-column layout for sections */
+  .section-block{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:30px;}
+  .section-block h2{grid-column:span 2;}
+  .section-block .card{width:100%;}
+
+  /* Personal Metrics Grid */
+  .metrics-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:15px;}
+  .metric-card{background:#e8e0f4;padding:15px;border-radius:15px;text-align:center;box-shadow:0 3px 8px rgba(0,0,0,0.08);display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:120px;}
+  .metric-card h3{font-size:16px;font-weight:600;margin-bottom:8px;color:#4a2c71;}
+  .metric-card input{width:100%;padding:8px;border:none;border-radius:8px;background:#f4f4f4;text-align:center;font-size:14px;color:#4a2c71;font-weight:600;}
+  .metric-card p{font-size:16px;color:#4a2c71;font-weight:600;margin-top:8px;}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html" style="text-decoration:none;color:white;">🌐 LifeFit 360</a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workouts.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+    <a href="log.in.html" class="login">Log In</a>
+    <a href="sign up.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<div class="profile-container">
+
+  <div class="profile-header">
+    <img id="profile-pic" src="profile.jpg" alt="Profile Picture">
+    <div class="profile-header-info">
+      <h2>Rachelle Geronimo</h2>
+      <p>Member since 2024 • Fitness Level: Intermediate</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><h3>45</h3><p>Workouts Completed</p></div>
+    <div class="stat"><h3>12</h3><p>Total Hours</p></div>
+    <div class="stat"><h3>6</h3><p>Challenges Joined</p></div>
+  </div>
+
+  <!-- Personal Metrics -->
+
+  <div class="section-block">
+    <h2>Personal Fitness Metrics</h2>
+    <div class="metrics-grid" style="grid-column:span 2;">
+      <div class="metric-card"><h3>⚖️ Weight (kg)</h3><input type="number" id="weight" value="68" min="1"></div>
+      <div class="metric-card"><h3>📏 Height (cm)</h3><input type="number" id="height" value="175" min="50"></div>
+      <div class="metric-card"><h3>🧮 BMI</h3><p id="bmi">22.2</p></div>
+      <div class="metric-card"><h3>🛌 Sleep Hours</h3><input type="number" id="sleep" value="7.5" step="0.1" min="0"></div>
+      <div class="metric-card"><h3>👣 Step Count</h3><input type="number" id="steps" value="8500" min="0"></div>
+    </div>
+    <div style="grid-column:span 2; display:flex; justify-content:center;">
+      <button class="edit-btn" id="saveMetrics">Save Metrics</button>
+    </div>
+  </div>
+
+  <!-- Goals -->
+
+  <div class="section-block">
+    <h2>Your Goals</h2>
+    <div class="card"><h3>🏋️ Build Strength</h3><p>Weekly 4–day routine focusing on full-body and core training.</p></div>
+    <div class="card"><h3>🔥 Lose Fat</h3><p>HIIT and cardio-based workouts added to your weekly plan.</p></div>
+    <div class="card"><h3>🧘 Improve Flexibility</h3><p>Stretch and yoga sessions scheduled every weekend.</p></div>
+  </div>
+
+  <!-- Social/Community -->
+
+  <div class="section-block">
+    <h2>Social / Community</h2>
+    <div class="card"><h3>👥 Friends</h3><p>12 friends connected.</p></div>
+    <div class="card"><h3>🏆 Challenges Participated</h3><p>6 challenges with friends.</p></div>
+  </div>
+
+  <!-- Profile Picture Update -->
+
+  <div class="section-block">
+    <h2>Update Profile Picture</h2>
+    <div class="card" style="grid-column:span 2;">
+      <input type="file" id="pic-input" accept="image/*">
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Profile Picture Update
+  const profilePic = document.getElementById('profile-pic');
+  const picInput = document.getElementById('pic-input');
+  picInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        profilePic.src = e.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Metrics
+  const saveBtn = document.getElementById('saveMetrics');
+  const weightInput = document.getElementById('weight');
+  const heightInput = document.getElementById('height');
+  const bmiDisplay = document.getElementById('bmi');
+
+  function calculateBMI() {
+    const weight = parseFloat(weightInput.value);
+    const heightCm = parseFloat(heightInput.value);
+    const heightM = heightCm / 100;
+    const bmi = (weight / (heightM * heightM)).toFixed(1);
+    bmiDisplay.textContent = bmi;
+  }
+
+  saveBtn.addEventListener('click', function() {
+    calculateBMI();
+    alert('Personal metrics saved!');
+  });
+
+  weightInput.addEventListener('input', calculateBMI);
+  heightInput.addEventListener('input', calculateBMI);
+
+  calculateBMI(); // initial calculation
+</script>
+
+</body>
+</html>

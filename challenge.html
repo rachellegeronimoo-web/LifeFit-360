@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenges | LifeFit 360</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body{background:#f4f4f4;color:#222;}
+  header { background:#4a2c71; color:white; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; border-radius:0 0 15px 15px; }
+  header .logo { font-weight:700; font-size:20px; display:flex; align-items:center; gap:10px; }
+  nav ul { display:flex; gap:25px; list-style:none; }
+  nav ul li a { text-decoration:none; color:white; font-weight:600; }
+  .auth-buttons a { padding:6px 14px; border-radius:6px; cursor:pointer; font-weight:600; text-decoration:none; margin-left:8px;}
+  .auth-buttons .login { background:#eee; color:#000; }
+  .auth-buttons .signup { background:#4a3cff; color:white; }
+  main{max-width:1200px;margin:40px auto;padding:0 20px;}
+  h2{color:#4a2c71;margin-bottom:16px;}
+  .category{margin-bottom:40px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+  .card { background:white; border-radius:12px; padding:16px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:flex; flex-direction:column; transition:transform 0.3s; }
+  .card:hover{transform:translateY(-5px);}
+  .card img{width:100%;height:140px;object-fit:cover;border-radius:10px;}
+  .card-content{margin-top:12px;flex:1;display:flex;flex-direction:column;}
+  .card h3{font-size:18px;color:#4a2c71;margin-bottom:6px;}
+  .card p{font-size:14px;color:#555;margin-bottom:8px;}
+  .card .countdown{font-size:13px;color:#4a2c71;margin-bottom:8px;}
+  .card .btn{padding:8px 12px;border:none;border-radius:8px;cursor:pointer;font-weight:600;background:#4a2c71;color:white;transition:0.3s;margin-top:auto;}
+  .card .btn.joined{background:#f39c12;}
+  .card .btn.disabled{background:#ccc; cursor:not-allowed;}
+  .progress-container{background:#eee;border-radius:10px;height:10px;overflow:hidden;margin-bottom:8px;}
+  .progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#4a2c71,#6a9cff);border-radius:10px;transition:width 1s ease;}
+  .participants{font-size:12px;color:#777;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+  .modal-bg{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; justify-content:center; align-items:center; z-index:100;}
+  .modal-bg.active{display:flex;}
+  .modal{ background:white; padding:24px; border-radius:12px; max-width:350px; width:90%; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.2); position:relative; }
+  .modal .close{ position:absolute; top:10px; right:12px; cursor:pointer; font-size:20px; }
+  .modal button{margin:8px; padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-weight:600; background:#4a2c71; color:white;}
+  .modal button:hover{opacity:0.9;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html" style="text-decoration:none;color:white;">🌐 LifeFit 360</a>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workouts.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <a href="login.html" class="login">Log In</a>
+    <a href="signup.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<main>
+  <div class="category">
+    <h2>🏃 Run Challenges</h2>
+    <div class="cards" id="runChallenges"></div>
+  </div>
+  <div class="category">
+    <h2>🏊 Swim Challenges</h2>
+    <div class="cards" id="swimChallenges"></div>
+  </div>
+  <div class="category">
+    <h2>🥾 Hiking Challenges</h2>
+    <div class="cards" id="hikeChallenges"></div>
+  </div>
+  <div class="category">
+    <h2>🚴 Biking Challenges</h2>
+    <div class="cards" id="bikeChallenges"></div>
+  </div>
+</main>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-bg" id="paymentModal">
+  <div class="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <h3>Join Challenge</h3>
+    <p id="paymentText">Pay ₱500 to join this challenge.</p>
+    <button class="btn" id="payBtn">Pay Now</button>
+  </div>
+</div>
+
+<!-- MERCHANT MODAL -->
+<div class="modal-bg" id="merchantModal">
+  <div class="modal">
+    <span class="close" id="closeMerchant">&times;</span>
+    <h3>Select Payment Method</h3>
+    <p>Choose your payment option:</p>
+    <button class="btn" id="gcashBtn">GCash</button>
+    <button class="btn" id="paymayaBtn">PayMaya</button>
+  </div>
+</div>
+
+<!-- GCash / PayMaya Demo Modal -->
+<div class="modal-bg" id="demoPayModal">
+  <div class="modal">
+    <span class="close" id="closeDemo">&times;</span>
+    <h3 id="demoTitle">GCash Payment</h3>
+    <p id="demoText">Send <strong>₱500</strong> to <strong>0917-XXX-XXXX</strong></p>
+    <p>Transaction ID: <span id="transId">#1234567890</span></p>
+    <button class="btn" id="confirmPaymentBtn">I Paid</button>
+  </div>
+</div>
+
+<script>
+const challengesData = {
+  run:[
+    {title:'December 5K', caption:'Earn a finisher badge!', participants:120, img:'5k.jpg' , fee:500},
+    {title:'Morning 10K', caption:'Beat your personal best!', participants:85, img:'10k.jpg', fee:500},
+    {title:'Weekend 3K', caption:'Perfect for beginners!', participants:54, img:'3k.jpg', fee:500},
+    {title:'City Marathon', caption:'Complete and earn the badge!', participants:200, img:'city marathon.jpg', fee:1000}
+  ],
+  swim:[
+    {title:'Swim 1K', caption:'Reach the finish line for a badge!', participants:35, img:'1k.jpg', fee:500},
+    {title:'Ocean Challenge', caption:'Swim against the waves!', participants:28, img:'ocean.jpg', fee:500},
+    {title:'Lap Master', caption:'Complete 50 laps!', participants:42, img:'lap.jpg', fee:500},
+    {title:'Night Swim', caption:'Challenge your limits!', participants:15, img:'night.jpg', fee:500}
+  ],
+  hiking:[
+    {title:'Mountain Hike', caption:'Reach the summit badge!', participants:60, img:'mountain hike.jpg', fee:500},
+    {title:'Trail Explorer', caption:'Explore new trails!', participants:45, img:'trail.jpg', fee:500},
+    {title:'Forest Walk', caption:'Earn the nature badge!', participants:30, img:'forest.jpg', fee:500},
+    {title:'Sunrise Trek', caption:'Catch the sunrise on top!', participants:25, img:'sunrise.jpg', fee:500}
+  ],
+  bike:[
+    {title:'City Bike Tour', caption:'Ride through downtown!', participants:70, img:'city.jpg', fee:500},
+    {title:'Weekend 50K', caption:'Challenge yourself!', participants:50, img:'50k.jpg', fee:500},
+    {title:'Mountain Biking', caption:'Conquer the hills!', participants:35, img:'mountain.jpg', fee:500},
+    {title:'Night Ride', caption:'Ride under the stars!', participants:20, img:'night b.jpg', fee:500}
+  ]
+};
+
+let currentCard = null;
+
+function renderChallenges(categoryId, data){
+  const container = document.getElementById(categoryId);
+  data.forEach(c=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.innerHTML=`
+      <img src="${c.img}" alt="${c.title}">
+      <div class="card-content">
+        <h3>${c.title}</h3>
+        <p>${c.caption}</p>
+        <div class="countdown">Time left: <span class="timer"></span></div>
+        <div class="participants">Participants: <span class="count">${c.participants}</span></div>
+        <div class="progress-container"><div class="progress-bar" style="width:0%"></div></div>
+        <button class="btn">Join Challenge</button>
+      </div>
+    `;
+    container.appendChild(card);
+
+    setTimeout(()=>{ card.querySelector('.progress-bar').style.width = Math.min(100,c.participants)+'%'; },100);
+
+    const randomDays = Math.floor(Math.random()*7)+1; 
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate()+randomDays);
+    addCountdown(card,endDate);
+
+    const btn = card.querySelector('.btn');
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('joined') || btn.classList.contains('disabled')) return;
+      currentCard = {card, btn, data:c};
+      document.getElementById('paymentText').innerText = `Pay ₱${c.fee} to join this challenge.`;
+      document.getElementById('paymentModal').classList.add('active');
+    });
+  });
+}
+
+function addCountdown(card,endDate){
+  const timerEl = card.querySelector('.timer');
+  const btn = card.querySelector('.btn');
+  function updateTimer(){
+    const now = new Date();
+    const diff = endDate - now;
+    if(diff<=0){
+      timerEl.innerText = "Challenge Ended";
+      btn.classList.add('disabled');
+      btn.innerText = "Ended";
+      clearInterval(interval);
+      return;
+    }
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((diff%(1000*60))/1000);
+    timerEl.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+  updateTimer();
+  const interval = setInterval(updateTimer,1000);
+}
+
+renderChallenges('runChallenges', challengesData.run);
+renderChallenges('swimChallenges', challengesData.swim);
+renderChallenges('hikeChallenges', challengesData.hiking);
+renderChallenges('bikeChallenges', challengesData.bike);
+
+document.getElementById('closeModal').addEventListener('click', ()=>document.getElementById('paymentModal').classList.remove('active'));
+document.getElementById('payBtn').addEventListener('click', ()=>{document.getElementById('paymentModal').classList.remove('active');document.getElementById('merchantModal').classList.add('active');});
+document.getElementById('closeMerchant').addEventListener('click', ()=>document.getElementById('merchantModal').classList.remove('active'));
+document.getElementById('closeDemo').addEventListener('click', ()=>document.getElementById('demoPayModal').classList.remove('active'));
+
+function demoPayment(method){
+  if(currentCard){
+    const modalTitle = document.getElementById('demoTitle');
+    const demoText = document.getElementById('demoText');
+    const transId = '#'+Math.floor(Math.random()*900000000+100000000);
+    modalTitle.innerText = method + ' Payment';
+    demoText.innerHTML = `Send <strong>₱${currentCard.data.fee}</strong> to <strong>${method==='GCash'?'0917-XXX-XXXX':'0918-XXX-XXXX'}</strong>`;
+    document.getElementById('transId').innerText = transId;
+    document.getElementById('merchantModal').classList.remove('active');
+    document.getElementById('demoPayModal').classList.add('active');
+  }
+}
+
+document.getElementById('gcashBtn').addEventListener('click', ()=>demoPayment('GCash'));
+document.getElementById('paymayaBtn').addEventListener('click', ()=>demoPayment('PayMaya'));
+
+document.getElementById('confirmPaymentBtn').addEventListener('click', ()=>{
+  if(currentCard){
+    currentCard.btn.classList.add('joined');
+    currentCard.btn.innerText='Joined!';
+    currentCard.data.participants++;
+    currentCard.card.querySelector('.count').innerText = currentCard.data.participants;
+    currentCard.card.querySelector('.progress-bar').style.width = Math.min(100,currentCard.data.participants)+'%';
+    document.getElementById('demoPayModal').classList.remove('active');
+    alert('Payment successful! You joined the challenge.');
+    currentCard = null;
+  }
+});
+</script>
+
+</body>
+</html>

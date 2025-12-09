@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeFit 360 | Log In</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+  body { background:#f4f4f4; }
+  header {
+    background:#4a2c71; color:white; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; border-radius:0 0 15px 15px;
+  }
+  header .logo { font-weight:700; font-size:20px; display:flex; align-items:center; gap:10px; }
+  nav ul { display:flex; gap:25px; list-style:none; }
+  nav a { text-decoration:none; color:white; font-weight:600; }
+  .auth-buttons a {
+    padding:6px 14px; border-radius:6px; cursor:pointer; font-weight:600; text-decoration:none;
+  }
+  .auth-buttons .login { background:#eee; color:#000; }
+  .auth-buttons .signup { background:#4a3cff; color:white; }
+
+  .container { display:flex; max-width:1200px; margin:40px auto; gap:40px; flex-wrap:wrap; justify-content:center; }
+  .form-section, .features-section { background:white; border-radius:15px; padding:40px; flex:1; box-shadow:0 10px 30px rgba(0,0,0,0.05); min-width:320px; }
+  .form-section h2 { font-size:28px; font-weight:700; margin-bottom:20px; text-align:center; }
+  .form-section input { width:100%; padding:14px 18px; margin-bottom:20px; border:1px solid #ccc; border-radius:6px; font-size:16px; }
+
+  /* checkbox container */
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  .checkbox-container input[type="checkbox"] { width:16px; height:16px; cursor:pointer; }
+
+  .form-section .login-btn { display:block; width:100%; padding:14px; background:#222; color:white; border:none; border-radius:8px; font-size:16px; text-align:center; margin-bottom:15px; cursor:pointer; }
+  .form-section .or { text-align:center; margin:10px 0; color:#888; }
+  .form-section .google-login { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px; border:1px solid #ccc; border-radius:8px; cursor:pointer; font-size:16px; text-decoration:none; color:black; }
+  .form-section a.forgot-password { display:block; text-align:center; margin-bottom:15px; color:#4a3cff; text-decoration:none; font-size:14px; }
+
+  .features-section h4 { font-size:16px; font-weight:600; margin-bottom:15px; color:#333; text-align:center; }
+  .features-section h3 { font-size:18px; font-weight:600; margin-bottom:10px; }
+  .feature { background:#f0f5ff; padding:15px; border-radius:12px; display:flex; align-items:center; gap:15px; margin-bottom:15px; }
+  .feature img { width:60px; height:60px; object-fit:cover; border-radius:10px; }
+  .feature p { font-size:14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="index.html" style="text-decoration:none;color:white;">🌐 LifeFit 360</a></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workout.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <a href="log.in.html" class="login">Log In</a>
+    <a href="sign up.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="form-section">
+    <h2>Welcome Back!</h2>
+    <form>
+      <input type="email" name="email" placeholder="E-mail" required>
+      <input type="password" name="password" placeholder="Password" required>
+
+      <!-- checkbox aligned neatly -->
+      <div class="checkbox-container">
+        <input type="checkbox" name="remember">
+        <span>Keep me signed in</span>
+      </div>
+
+      <a href="forgot_password.html" class="forgot-password">Forgot your password?</a>
+
+      <button type="submit" class="login-btn">Log In</button>
+
+      <div class="or">or</div>
+
+      <a href="https://accounts.google.com/signin" class="google-login" target="_blank">
+        <img src="https://img.icons8.com/color/48/google-logo.png"/> Log in with Google
+      </a>
+    </form>
+  </div>
+
+  <div class="features-section">
+    <h4>Create an account to access these:</h4>
+    <div class="feature">
+      <img src="p1.jpg" alt="">
+      <div>
+        <h3>Today's Workout Completed!</h3>
+        <p>Track your daily workouts and your progress on your fitness journey.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="p2.jpg" alt="">
+      <div>
+        <h3>Teamwork Makes the Dream Work:</h3>
+        <p>Join a team challenge to motivate one another and work out together.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="p3.jpg" alt="">
+      <div>
+        <h3>Picture Perfect!</h3>
+        <p>Add photos and create collages to see your progress visually.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="p4.jpg" alt="">
+      <div>
+        <h3>Meal Planning Pro:</h3>
+        <p>Save and organize all of your favorite recipes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script to redirect Log In button to index.html -->
+<script>
+  const loginForm = document.querySelector('form');
+  loginForm.addEventListener('submit', function(e){
+    e.preventDefault(); // prevent actual form submission
+    window.location.href = 'index.html'; // redirect to home page
+  });
+</script>
+
+</body>
+</html>

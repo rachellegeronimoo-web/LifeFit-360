@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingredients | LifeFit 360</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { background:#f4f4f4; }
+
+/* HEADER */
+header {
+  background:#4a2c71;
+  color:white;
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-radius:0 0 15px 15px;
+}
+header .logo { font-weight:700; font-size:20px; display:flex; align-items:center; gap:10px; }
+nav ul { display:flex; gap:25px; list-style:none; }
+nav a { text-decoration:none; color:white; font-weight:600; }
+.auth-buttons a { padding:6px 14px; border-radius:6px; cursor:pointer; font-weight:600; text-decoration:none; }
+.auth-buttons .login { background:#eee; color:#000; }
+.auth-buttons .signup { background:#4a3cff; color:white; }
+
+/* SECTIONS */
+section { max-width:1400px; margin:40px auto; padding:0 20px; }
+section h2 { font-size:28px; margin-bottom:20px; color:#4a2c71; }
+
+/* CARD GRID: 4 per row */
+.cards {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:20px;
+}
+
+/* CARD STYLE */
+.card {
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0px 4px 12px rgba(0,0,0,0.1);
+  transition:transform 0.3s;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: black;
+  margin: 10px 0;
+}
+
+.card:hover { transform:translateY(-5px); }
+.card img { width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:15px; }
+.card h3 { font-size:20px; margin-bottom:10px; color:#4a2c71; }
+.card h4 { font-size:16px; margin:10px 0 5px; color:#4a2c71; } /* ingredients/instructions violet */
+.card ul { margin-left:20px; margin-bottom:10px; }
+.card ol { margin-left:20px; }
+.favorite-wrapper {
+  margin-top:auto;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.favorite-btn {
+  padding:6px 10px;
+  border:none;
+  background:#4a2c71;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+}
+.favorite-btn.added { background:#f39c12; }
+
+/* Responsive */
+@media(max-width:1200px){ .cards { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:700px){ .cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html" style="text-decoration:none;color:white;">🌐 LifeFit 360</a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="workout.html">Workouts</a></li>
+      <li><a href="nutrition.html">Nutrition</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="challenge.html">Challenges</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+    <a href="log.in.html" class="login">Log In</a>
+    <a href="sign up.html" class="signup">Sign Up</a>
+  </div>
+</header>
+
+<!-- ==================== SECTIONS ==================== -->
+<!-- Breakfast Section -->
+<section>
+  <h2>Breakfast</h2>
+  <div class="cards">
+    <!-- 4 breakfast cards -->
+    <div class="card">
+      <img src="b1.jpg" alt="Breakfast Burrito">
+      <h3>Breakfast Burrito</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 tortilla</li><li>2 eggs</li><li>Spinach</li><li>Avocado</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Scramble eggs.</li><li>Place in tortilla with spinach and avocado.</li><li>Roll and serve.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="b2.jpg" alt="Breakfast Bars">
+      <h3>Breakfast Bars</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 cup oats</li><li>1 banana</li><li>Chocolate chips</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Mix ingredients.</li><li>Press into pan and bake 20 min at 180°C.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="b3.jpg" alt="Vegan Breakfast Plate">
+      <h3>Vegan Breakfast Plate</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1/2 cup quinoa</li><li>Chickpeas 1/2 cup</li><li>Avocado 1/2</li><li>Spinach</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Cook quinoa.</li><li>Top with chickpeas, avocado, and spinach.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="b4.jpg" alt="Savory Quinoa Breakfast Bowl">
+      <h3>Savory Quinoa Breakfast Bowl</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 cup quinoa</li><li>Egg</li><li>Spinach</li><li>Avocado</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Cook quinoa.</li><li>Top with poached egg, spinach, avocado.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Lunch Section ==================== -->
+<section>
+  <h2>Lunch</h2>
+  <div class="cards">
+    <!-- 4 lunch cards -->
+    <div class="card">
+      <img src="l1.jpg" alt="Shrimp Jambalaya">
+      <h3>Shrimp Jambalaya</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 cup cooked rice</li><li>Shrimp 100g</li><li>Bell pepper, onion</li><li>Tomato sauce</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Sauté vegetables.</li><li>Add shrimp and cook.</li><li>Add rice and sauce, mix well.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="l2.jpg" alt="High Protein Chicken Fried Rice">
+      <h3>High Protein Chicken Fried Rice</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 cup rice</li><li>Chicken 100g</li><li>Mixed vegetables</li><li>Soy sauce</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Cook chicken and vegetables.</li><li>Add rice and soy sauce, stir fry 5 min.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="l3.jpg" alt="Soy-Glazed Chicken">
+      <h3>Soy-Glazed Chicken</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Chicken breast 150g</li><li>Soy sauce 2 tbsp</li><li>Honey 1 tsp</li><li>Garlic</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Marinate chicken with soy sauce, honey, garlic 15 min.</li><li>Grill until cooked.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="l4.jpg" alt="Teriyaki Salmon Poke Bowl">
+      <h3>Teriyaki Salmon Poke Bowl</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Salmon 100g</li><li>Rice 1 cup</li><li>Vegetables</li><li>Teriyaki sauce</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Cook salmon and rice.</li><li>Top rice with salmon, vegetables, and sauce.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Dinner Section ==================== -->
+<section>
+  <h2>Dinner</h2>
+  <div class="cards">
+    <!-- 4 dinner cards -->
+    <div class="card">
+      <img src="d1.jpg" alt="Easy Microwave Baked Potato">
+      <h3>Easy Microwave Baked Potato</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 medium potato</li><li>Olive oil 1 tsp</li><li>Salt, pepper</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Microwave potato 8-10 min until tender.</li><li>Drizzle olive oil and season.</li></ol>
+      
+      <div class="favorite-wrapper">
+       
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="d2.jpg" alt="Healthy Teriyaki Meatballs">
+      <h3>Healthy Teriyaki Meatballs</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Lean ground meat 200g</li><li>Teriyaki sauce 2 tbsp</li><li>Garlic, ginger</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Mix meat with seasonings.</li><li>Form balls, bake 20 min.</li><li>Brush with teriyaki sauce.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="d3.jpg" alt="Easy Egg Salad">
+      <h3>Easy Egg Salad</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Eggs 3</li><li>Greek yogurt 2 tbsp</li><li>Mustard 1 tsp</li><li>Celery</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Boil eggs 10 min, peel and chop.</li><li>Mix with yogurt, mustard, and celery.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="d4.jpg" alt="Buttered Chicken">
+      <h3>Buttered Chicken</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Chicken breast 150g</li><li>Butter 1 tsp</li><li>Garlic, spices</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Sauté chicken with butter and spices until cooked.</li></ol>
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Snacks Section ==================== -->
+<section>
+  <h2>Snacks</h2>
+  <div class="cards">
+    <!-- 4 snacks cards -->
+    <div class="card">
+      <img src="s1.jpg" alt="Gluten Free Chocolate Chip">
+      <h3>Gluten Free Chocolate Chip</h3>
+      <h4>Ingredients</h4>
+      <ul><li>1 cup almond flour</li><li>1/4 cup chocolate chips</li><li>1 egg</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Mix ingredients.</li><li>Bake at 180°C for 12 min.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="s2.jpg" alt="Choco Lava Baked Oatmeal">
+      <h3>Choco Lava Baked Oatmeal</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Oats 1 cup</li><li>Chocolate 50g</li><li>Milk 1/2 cup</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Mix ingredients.</li><li>Bake 20 min at 180°C.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="s3.jpg" alt="Baked Avocado Eggs">
+      <h3>Baked Avocado Eggs</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Avocado 1</li><li>Egg 2</li><li>Salt, pepper</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Halve avocado, remove pit.</li><li>Crack egg into avocado.</li><li>Bake 15 min at 180°C.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="s4.jpg" alt="Pizza Omelette">
+      <h3>Pizza Omelette</h3>
+      <h4>Ingredients</h4>
+      <ul><li>2 eggs</li><li>Tomato 1</li><li>Cheese 30g</li><li>Spinach</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Whisk eggs.</li><li>Cook with tomato, spinach, and cheese until set.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Drinks Section ==================== -->
+<section>
+  <h2>Drinks</h2>
+  <div class="cards">
+    <!-- 4 drinks cards -->
+    <div class="card">
+      <img src="dr1.jpg" alt="Peach Lemonade">
+      <h3>Peach Lemonade</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Peach puree 1/2 cup</li><li>Lemon juice 1/4 cup</li><li>Water 1 cup</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Mix ingredients and serve chilled.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="dr2.jpg" alt="Strawberry Yogurt Smoothie">
+      <h3>Strawberry Yogurt Smoothie</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Strawberries 1 cup</li><li>Yogurt 1/2 cup</li><li>Honey 1 tsp</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Blend all ingredients until smooth.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="dr3.jpg" alt="Honey Ginger Tea">
+      <h3>Honey Ginger Tea</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Ginger slices</li><li>Honey 1 tsp</li><li>Hot water 1 cup</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Steep ginger in hot water 5 min.</li><li>Add honey and stir.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="dr4.jpg" alt="Matcha Latte">
+      <h3>Matcha Latte</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Matcha 1 tsp</li><li>Milk 1 cup</li><li>Honey optional</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Whisk matcha with a little hot water.</li><li>Add milk and honey, stir and serve.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Dessert Section ==================== -->
+<section>
+  <h2>Dessert</h2>
+  <div class="cards">
+    <!-- 4 dessert cards -->
+    <div class="card">
+      <img src="ds1.jpg" alt="Chocolate Mousse">
+      <h3>Chocolate Mousse</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Dark chocolate 50g</li><li>Whipping cream 1/2 cup</li><li>Egg white 1</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Melt chocolate.</li><li>Whip cream and fold with chocolate.</li><li>Chill before serving.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ds2.jpg" alt="Fruit Parfait">
+      <h3>Fruit Parfait</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Yogurt 1/2 cup</li><li>Granola 1/4 cup</li><li>Mixed fruits</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Layer yogurt, granola, and fruits in a cup.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ds3.jpg" alt="Protein Brownies">
+      <h3>Protein Brownies</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Protein powder 1/2 cup</li><li>Cocoa 2 tbsp</li><li>Egg 1</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Mix ingredients and bake at 180°C for 15 min.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ds4.jpg" alt="Banana Ice Cream">
+      <h3>Banana Ice Cream</h3>
+      <h4>Ingredients</h4>
+      <ul><li>Banana 1</li><li>Milk 1/4 cup</li><li>Honey 1 tsp</li></ul>
+      <h4>Instructions</h4>
+      <ol><li>Freeze banana slices.</li><li>Blend with milk and honey until creamy.</li></ol>
+      
+      <div class="favorite-wrapper">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>
+
