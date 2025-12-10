@@ -27,7 +27,7 @@
     .phone-bg{
       width:290px;
       height:580px;
-      background:#000;            /* black bezel */
+      background:#000;
       border-radius:45px;
       position:absolute;
       top:-5%;
@@ -43,11 +43,10 @@
       position:absolute;
       inset:14px;
       border-radius:32px;
-      background:#eab8ff;       /* screen color */
-      pointer-events:none;
+      background:#eab8ff;
     }
 
-    /* CAMERA NOTCH */
+    /* CAMERA */
     .phone-bg::before {
       content:"";
       position:absolute;
@@ -72,7 +71,7 @@
     .left-button { left:-10px; top:120px; height:50px; }
     .right-button { right:-10px; top:200px; height:40px; }
 
-    /* WOMAN FULLY OVERFLOWING */
+    /* WOMAN */
     .woman{
       position:absolute;
       z-index:10;
@@ -92,7 +91,79 @@
         100% { transform: translateX(-50%) translateY(0); }
     }
 
-    .label{position:absolute;background:white;padding:4px 10px;border-radius:4px;color:black;font-weight:700;font-size:14px;}
+    .label{
+        position:absolute;
+        background:white;
+        padding:4px 10px;
+        border-radius:4px;
+        color:black;
+        font-weight:700;
+        font-size:14px;
+    }
+
+
+    /* ---------------------------- */
+    /* 📱 MOBILE RESPONSIVE SECTION */
+    /* ---------------------------- */
+
+    @media (max-width: 900px) {
+        header {
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+        }
+        nav ul {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .hero {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 20px;
+            height: auto;
+        }
+
+        .hero-left h1 {
+            font-size: 48px !important;
+        }
+        .sub {
+            flex-direction: column;
+        }
+        .join-btn {
+            font-size: 20px !important;
+            padding: 14px 28px !important;
+        }
+
+        /* Move phone below text */
+        .hero-right {
+            margin-top: 60px;
+            transform: none !important;
+            width: 100%;
+            height: 500px;
+        }
+
+        .phone-bg {
+            left: 50%;
+        }
+        .woman {
+            width: 180%;
+            top: -20%;
+        }
+
+        /* Shrink labels on mobile */
+        .label {
+            font-size: 14px !important;
+            padding: 4px 8px !important;
+        }
+        .hero-right img {
+            transform: scale(0.7);
+        }
+    }
+
 </style>
 </head>
 <body>
@@ -127,27 +198,21 @@
     <div class="hero-right" style="position:relative;width:460px;height:580px;margin-right:0;display:flex;justify-content:center;align-items:center; transform: translateX(-80px);">
         <div class="phone-bg"></div>
 
-        <!-- SIDE BUTTONS -->
         <div class="left-button"></div>
         <div class="right-button"></div>
 
-        <!-- HUGE WOMAN FULLY OVERFLOWING -->
         <img src="woman.png" class="woman" />
 
-        <!-- TRACK KCAL -->
-        <div class="label" style="position:absolute;top:-10px;left:-140px;background:white;padding:6px 14px;border-radius:6px;color:black;font-weight:700;font-size:22px;">TRACK KCAL</div>
+        <div class="label" style="top:-10px;left:-140px;font-size:22px;">TRACK KCAL</div>
         <img src="watch.png" style="position:absolute;top:-15px;left:-170px;width:200px;" />
 
-        <!-- WORKOUTS -->
-        <div class="label" style="position:absolute;top:230px;left:-130px;background:white;padding:6px 14px;border-radius:6px;color:black;font-weight:700;font-size:22px;">WORKOUTS</div>
+        <div class="label" style="top:230px;left:-130px;font-size:22px;">WORKOUTS</div>
         <img src="workout.png" style="position:absolute;top:275px;left:-210px;width:290px;" />
 
-        <!-- CHALLENGES -->
-        <div class="label" style="position:absolute;top:75px;right:-25px;background:white;padding:6px 14px;border-radius:6px;color:black;font-weight:700;font-size:22px;z-index: 12;">CHALLENGES</div>
+        <div class="label" style="top:75px;right:-25px;font-size:22px;z-index: 12;">CHALLENGES</div>
         <img src="challenges.png" style="position:absolute; top:90px; right:-70px; width:290px; z-index: 12;" />
 
-        <!-- NUTRITION -->
-        <div class="label" style="position:absolute;bottom:250px;right:-80px;background:white;padding:6px 14px;border-radius:6px;color:black;font-weight:700;font-size:22px;">NUTRITION</div>
+        <div class="label" style="bottom:250px;right:-80px;font-size:22px;">NUTRITION</div>
         <img src="nutrition.png" style="position:absolute;bottom:75px;right:-115px;width:260px;" />
     </div>
 </section>
