@@ -1,0 +1,36 @@
+
+name: LifeFit 360 Docker CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t lifefit360 .
+
+      - name: Run Docker container
+        run: docker run -d -p 8080:80 --name lifefit360-container lifefit360
+
+      - name: Test website response
+        run: |
+          for i in {1..10}; do
+            if curl -fsS http://localhost:8080/ -o /dev/null; then
+              echo "LifeFit 360 is responding successfully."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Website test failed."
+          exit 1
