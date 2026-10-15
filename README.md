@@ -61,3 +61,5 @@ Rachelle Geronimo
 
 ## Purpose
 This project was developed as part of a DevOps and Platform Integration activity to practice version control, containerization, automated testing, and deployment concepts.
+This project uses GitHub Actions to build and test the Docker image. 
+
